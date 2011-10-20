@@ -1,1 +1,4 @@
 name = Search Krumo
+description = Search krumo's and highlight query results.
+core = 6.x
+package = Development
