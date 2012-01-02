@@ -28,7 +28,7 @@ $(function() {
     form     += '<div class="search-krumo-results"></div>';
     
     // Insert the form before the first krumo.
-    $('.messages.status').prepend(form);
+		k.eq(0).before(form);
   }
   
   // On submit execute the following.
@@ -44,18 +44,20 @@ $(function() {
     // If the query is not empty, we can proceed.
     if (q) {
       var k;
-      if (o.length > 0 && o != 'all') {
+      if (o && o != 'all') {
         k = $('.messages.status ul li:nth-child('+ o +') .krumo-root');
       }
       else {
         k = $('.krumo-root');
       }
+      $('.krumo-get-path').remove();
       // Find all elements with the query.
       $('.krumo-element:contains('+ q +')', k).each(function(i) {
         // Show result overview.
         $('.search-krumo-results').html('Found '+ $('.krumo-element:contains('+ q +')', k).length +' elements');
         // Add result class.
-        $(this).addClass('krumo-query-result');
+        $(this).addClass('krumo-query-result').append(Drupal.t('<span class="krumo-get-path"><a href="#">Get path</a></span>'));
+
         // Expand parents until the query result is layed open before the user.
         $(this).parents(".krumo-nest").show().prev().addClass('krumo-opened');
       });
@@ -66,4 +68,45 @@ $(function() {
     
     return false;
   });
+  
+  // The function to return the path
+	$('.krumo-get-path').live("click", function(){
+		// Function for getting a path to an element in php
+		var pathItems = [];
+		// Array which will hold all the pieces of the trail					
+		var currentItem = ['Tail', $(this).parent().children('.krumo-name').text()]; 					
+		// Last item	
+		pathItems.push(currentItem);						 					
+		
+		// Filling the trail array
+		$(this).parents('.krumo-nest').each(function(i) {
+			var elType = $(this).prev('.krumo-element').children('.krumo-type').text().toString().split(' ');
+			if (elType[0] == 'Object') {
+				var currentItem = ['Object', $(this).prev('.krumo-element').children('.krumo-name').text()];
+			} else if (elType[0] == 'Array,') {
+				var currentItem = ['Array', $(this).prev('.krumo-element').children('.krumo-name').text()];							
+			}
+			pathItems.push(currentItem);						
+		});
+	
+		// The string which will be returned
+		var trail = '';
+		// For each item in the trail array
+	  $.each(pathItems, function(i) {
+			if (pathItems[i +1] && pathItems[i +1][0] == 'Array') {
+				if (parseInt($(this)[1])) {
+					trail = "[" + $(this)[1] + "]" + trail;
+				} else {
+					trail = "['" + $(this)[1] + "']" + trail;								
+				}
+			} else if (pathItems[i +1] && pathItems[i +1][0] == 'Object') {
+				trail = "->" + $(this)[1] + trail;
+			} else {
+				// We are at the first item
+				trail = "$var" + trail;							
+			}
+		});
+		alert(trail);					
+		return false;
+  });    
 });
