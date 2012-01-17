@@ -1,4 +1,6 @@
 name = Search Krumo
 description = Search krumo's and highlight query results.
-core = 6.x
+core = 7.x
+scripts[] = search_krumo.js
+stylesheets[all][] = search_krumo.css
 package = Development
