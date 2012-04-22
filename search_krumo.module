@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Print a variable to the 'message' area of the page. Uses devel's dpm()
+ */
+function sdpm($input, $name = NULL) {
+	// Get the label of the variable	
+	$label = search_krumo_inspect($input);
+	
+	// Add the javascript to drupal
+	drupal_add_js(drupal_get_path('module', 'search_krumo') . '/search_krumo.js');
+	drupal_add_js(array('searchKrumo' => array('var' => array($label))), 'setting');
+	
+	// Route it to the devel module	
+	dpm($input, $name);
+}
+
+/**
+ * Return a variable's label
+ */
+function search_krumo_inspect($var) {
+  $backtrace = debug_backtrace();
+  $src = file($backtrace[1]["file"]);
+  $line = $src[ $backtrace[1]['line'] - 1 ];
+
+  // let's match the function call and the last closing bracket
+  preg_match( "#sdpm\((.+)\)#", $line, $match );
+
+  /* let's count brackets to see how many of them actually belongs 
+     to the var name
+     Eg:   die(inspect($this->getUser()->hasCredential("delete")));
+            We want:   $this->getUser()->hasCredential("delete")
+  */
+  $max = strlen($match[1]);
+  $varname = "";
+  $c = 0;
+  for($i = 0; $i < $max; $i++){
+      if(     $match[1]{$i} == "(" ) $c++;
+      elseif( $match[1]{$i} == ")" ) $c--;
+      if($c < 0) break;
+      $varname .=  $match[1]{$i};
+  }
+  $label = $varname;
+	
+	// Get the first argument of sdpm
+	$real_label = explode(', ', $label);
+	// Return awesomeness
+	return $real_label[0];
+}

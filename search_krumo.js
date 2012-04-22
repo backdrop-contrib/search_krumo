@@ -9,10 +9,10 @@ Drupal.behaviors.search_krumo = {
   attach: function() {
 	
 		// Define krumo root.
-	  var k = $('.krumo-root');
+	  var k = $('.krumo-root:not(".processed")');
   
   	// Check if there is a krumo.
-  	if ($(k).length > 0) {
+  	if ($(k).addClass('processed').length > 0) {
     	var form  = '<div class="search-krumo">';
     	form     += '  <form id="search-krumo">';
     	form     += '    <input type="text" name="search-query" />';
@@ -72,12 +72,14 @@ Drupal.behaviors.search_krumo = {
     	return false;
   	});
   
-  	$('.krumo-element').append(Drupal.t('<span class="krumo-get-path"><a href="#">Get path</a></span>'));  
+  	$('.krumo-element:not(".processed")').addClass('processed').append(Drupal.t('<span class="krumo-get-path"><a href="#">Get path</a></span>'));  
   
   	// The function to return the path
 		$('.krumo-get-path').click( function(){
 			// Function for getting a path to an element in php
 			var pathItems = [];
+			var krumoIndex = $(this).parents('.krumo-root').parent('li').index();			
+			
 			// Array which will hold all the pieces of the trail					
 			var currentItem = ['Tail', $(this).parent().children('.krumo-name').text()]; 					
 			// Last item	
@@ -108,7 +110,7 @@ Drupal.behaviors.search_krumo = {
 					trail = "->" + $(this)[1] + trail;
 				} else {
 					// We are at the first item
-					trail = "$var" + trail;							
+					trail = Drupal.settings.searchKrumo.var[krumoIndex] + trail;							
 				}
 			});
 			alert(trail);					
