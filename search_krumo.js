@@ -110,7 +110,12 @@ Drupal.behaviors.search_krumo = {
 					trail = "->" + $(this)[1] + trail;
 				} else {
 					// We are at the first item
-					trail = Drupal.settings.searchKrumo.var[krumoIndex] + trail;							
+					if (Drupal.settings.searchKrumo.var[krumoIndex]) {
+						trail = Drupal.settings.searchKrumo.var[krumoIndex] + trail;
+					}	
+					else {
+						trail = Drupal.settings.searchKrumo.var + trail;
+					}						
 				}
 			});
 			alert(trail);					
