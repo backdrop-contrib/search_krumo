@@ -56,15 +56,15 @@ Drupal.behaviors.search_krumo = {
         	k = $('.krumo-root');
       	}
       	// Find all elements with the query.
-      	$('.krumo-element:contains('+ q +')', k).each(function(i) {
-        	// Show result overview.
-        	$('.search-krumo-results').html('Found '+ $('.krumo-element:contains('+ q +')', k).length +' elements');
+      	$('.krumo-element > a:contains('+ q +'), .krumo-element > strong:contains('+ q +')', k).each(function(i) {
         	// Add result class.
-        	$(this).addClass('krumo-query-result');
+        	$(this).parent().addClass('krumo-query-result');
 
         	// Expand parents until the query result is layed open before the user.
-        	$(this).parents(".krumo-nest").show().prev().addClass('krumo-opened');
+        	$(this).parent().parents(".krumo-nest").show().prev().addClass('krumo-opened');
       	});
+        // Show result overview.
+        $('.search-krumo-results').html('Found '+ $('.krumo-element > a:contains('+ q +'), .krumo-element > strong:contains('+ q +')', k).length +' elements');
     	}
     	else {
       	$('.search-krumo-results').html('Empty query');
@@ -118,7 +118,11 @@ Drupal.behaviors.search_krumo = {
 					}						
 				}
 			});
-			alert(trail);					
+			$(this).addClass('hidden').hide().before('<input id="trail-input" value="' + trail + '" />');
+			$('#trail-input').select().blur( function(){
+				$(this).remove();
+				$('.krumo-get-path.hidden').show();
+			});
 			return false;
   	});    
   }

@@ -1,6 +1,21 @@
 <?php
 
 /**
+ * Implements hook_preprocess_page
+ * We use this to test search krumo
+ */
+/*
+function search_krumo_preprocess_page(&$variables) {
+	sdpm($variables);	
+	
+	$test = array(
+		'test'	
+	);	
+	sdpm($test);
+}
+//*/
+
+/**
  * Print a variable to the 'message' area of the page. Uses devel's dpm()
  */
 function sdpm($input, $name = NULL) {

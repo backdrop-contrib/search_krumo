@@ -32,3 +32,8 @@
 		display: inline;
 		color: white;	
 	}
+	
+	#trail-input {
+		padding: 0px;
+		width: 400px;
+	}
