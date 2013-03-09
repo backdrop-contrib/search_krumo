@@ -18,3 +18,22 @@
   .krumo-element.krumo-query-result strong {
     color: #fff;
   }
+
+	.krumo-get-path a {
+		display: none;
+    background: #428484;
+    border-radius: 4px 4px 4px 4px;
+    color: #FFFFFF;
+    padding: 3px;
+    margin-left: 10px;
+	}
+	
+	.krumo-element:hover .krumo-get-path a {
+		display: inline;
+		color: white;	
+	}
+	
+	#trail-input {
+		padding: 0px;
+		width: 400px;
+	}
