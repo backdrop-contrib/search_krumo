@@ -15,10 +15,10 @@ Drupal.behaviors.search_krumo_search = {
     if ($(k).addClass('processed').length > 0) {
       var form  = '<div class="search-krumo">';
       form     += '  <form id="search-krumo">';
-      form     += '    <input type="text" name="search-query" />';
+      form     += '    <input class="form-text" type="text" name="search-query" />';
       // If there are more than one krumo's.
       if ($(k).length > 1) {
-        form   += '    <select name="search-option">';
+        form   += '    <select class="form-select" name="search-option">';
         form   += '      <option value="all">search all</option>';
         // For each krumo.
         $(k).each(function(i) {
@@ -27,7 +27,7 @@ Drupal.behaviors.search_krumo_search = {
         });
         form   += '    </select>';
       }
-      form     += '    <input type="submit" value="submit" name="submit" />';
+      form     += '    <input class="form-submit" type="submit" value="submit" name="submit" />';
       form     += '  </form>';
       form     += '</div>';
       form     += '<div class="search-krumo-results"></div>';
