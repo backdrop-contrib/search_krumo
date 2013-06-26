@@ -62,8 +62,8 @@ Drupal.behaviors.search_krumo_trail = {
         }
         else {
           // Add the variable name if it could be found.
-          if (Drupal.settings.searchKrumo !== undefined && Drupal.settings.searchKrumo.var[krumoIndex] !== undefined) {
-            trail = Drupal.settings.searchKrumo.var[krumoIndex] + trail;
+          if (Drupal.settings.searchKrumo !== undefined && Drupal.settings.searchKrumo.variable[krumoIndex] !== undefined) {
+            trail = Drupal.settings.searchKrumo.variable[krumoIndex] + trail;
           }
           // Otherwise we return the default variable name.
           else {

@@ -22,7 +22,7 @@
 function sdpm($input, $name = NULL) {
   // Get the label that we should prepend to each 'Get path' button.
   $label = search_krumo_inspect();
-  drupal_add_js(array('searchKrumo' => array('var' => array($label))), 'setting');
+  drupal_add_js(array('searchKrumo' => array('variable' => array($label))), 'setting');
 
   // Route it to the dpm() function provided by the Devel module.
   dpm($input, $name);
