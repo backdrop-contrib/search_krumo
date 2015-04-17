@@ -76,7 +76,7 @@ function search_krumo_inspect() {
     $line = $src[$backtrace[1]['line'] - 1];
 
     // Match the function call and the last closing bracket.
-    preg_match('#sdpm\((.+)\)#', $line, $match);
+    preg_match('#sdpm\((.*?)(,|\))#', $line, $match);
 
     // If we have a match we return it.
     if (isset($match[1])) {
