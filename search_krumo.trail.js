@@ -4,7 +4,7 @@
       $('.krumo-element:not(".processed")').addClass('processed').append('<span class="krumo-get-path"><a href="#">' + Drupal.t('Get path') + '</a></span>');
 
       // The function to return the path.
-      $('.krumo-get-path').click(function(e) {
+      $('.krumo-get-path').once().click(function(e) {
         // Function for getting a path to an element in PHP.
         var pathItems = [];
         var parent = $(this).parents('.krumo-root');
