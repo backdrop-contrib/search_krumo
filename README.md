@@ -38,7 +38,7 @@ Credits
 -------
 
 - Ported to Backdrop CMS by Alex Shapka (https://github.com/AlexShapka).
-- Originally written for Drupal by Bram ten Hove (https://www.drupal.org/u/bramtenhove).
+- Originally written for Drupal by Bram ten Hove (https://github.com/bramtenhove).
 
 License
 -------
