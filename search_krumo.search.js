@@ -1,5 +1,5 @@
 (function ($) {
-  Drupal.behaviors.search_krumo_search = {
+  Backdrop.behaviors.search_krumo_search = {
     attach: function() {
       // Define krumo root.
       var k = $('.krumo-root:not(".processed")');
@@ -13,15 +13,15 @@
         // If there are more than one krumo's.
         if ($(k).length > 1) {
           form   += '    <select class="form-select" name="search-option">';
-          form   += '      <option value="all">' + Drupal.t('Search all') + '</option>';
+          form   += '      <option value="all">' + Backdrop.t('Search all') + '</option>';
           // For each krumo.
           $(k).each(function(i) {
             i++;
-            form += '      <option value="'+ i +'">' + Drupal.t('Search krumo') + ' #'+ i +'</option>';
+            form += '      <option value="'+ i +'">' + Backdrop.t('Search krumo') + ' #'+ i +'</option>';
           });
           form   += '    </select>';
         }
-        form     += '    <input class="form-submit" type="submit" value="' + Drupal.t('Submit') + '" name="submit" />';
+        form     += '    <input class="form-submit" type="submit" value="' + Backdrop.t('Submit') + '" name="submit" />';
         form     += '  </form>';
         form     += '</div>';
         form     += '<div class="search-krumo-results"></div>';
@@ -70,10 +70,10 @@
             }
           });
           // Show result overview.
-          $('.search-krumo-results').html(Drupal.formatPlural($('.krumo-element > a:contains('+ q +'), .krumo-element > strong:contains('+ q +'), .krumo-preview:contains('+ q +')', k).length, 'Found 1 element', 'Found @count elements'));
+          $('.search-krumo-results').html(Backdrop.formatPlural($('.krumo-element > a:contains('+ q +'), .krumo-element > strong:contains('+ q +'), .krumo-preview:contains('+ q +')', k).length, 'Found 1 element', 'Found @count elements'));
         }
         else {
-          $('.search-krumo-results').html(Drupal.t('Empty query'));
+          $('.search-krumo-results').html(Backdrop.t('Empty query'));
         }
 
         // Prevent the form from being submitted.

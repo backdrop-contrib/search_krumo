@@ -1,7 +1,7 @@
 (function ($) {
-  Drupal.behaviors.search_krumo_trail = {
+  Backdrop.behaviors.search_krumo_trail = {
     attach: function() {
-      $('.krumo-element:not(".processed")').addClass('processed').append('<span class="krumo-get-path"><a href="#">' + Drupal.t('Get path') + '</a></span>');
+      $('.krumo-element:not(".processed")').addClass('processed').append('<span class="krumo-get-path"><a href="#">' + Backdrop.t('Get path') + '</a></span>');
 
       // The function to return the path.
       $('.krumo-get-path').once().click(function(e) {
@@ -39,7 +39,7 @@
             if (parseInt($(this)[1]) == $(this)[1]) {
               trail = '[' + $(this)[1] + ']' + trail;
             }
-            // Replace 'und' by the Drupal constant LANGUAGE_NONE.
+            // Replace 'und' by the Backdrop constant LANGUAGE_NONE.
             else if ($(this)[1] == 'und') {
               trail = '[LANGUAGE_NONE]' + trail;
             }
@@ -50,7 +50,7 @@
           }
           // Fix the trail for objects.
           else if (pathItems[i +1] && pathItems[i +1][0] == 'Object') {
-            // Replace 'und' by the Drupal constant LANGUAGE_NONE.
+            // Replace 'und' by the Backdrop constant LANGUAGE_NONE.
             if ($(this)[1] == 'und') {
               trail = '->{LANGUAGE_NONE}' + trail;
             }
@@ -61,8 +61,8 @@
           }
           else {
             // Add the variable name if it could be found.
-            if (Drupal.settings.searchKrumo !== undefined && Drupal.settings.searchKrumo.variable[krumoIndex] !== undefined) {
-              trail = Drupal.settings.searchKrumo.variable[krumoIndex] + trail;
+            if (Backdrop.settings.searchKrumo !== undefined && Backdrop.settings.searchKrumo.variable[krumoIndex] !== undefined) {
+              trail = Backdrop.settings.searchKrumo.variable[krumoIndex] + trail;
             }
             // Otherwise we return the default variable name.
             else {
