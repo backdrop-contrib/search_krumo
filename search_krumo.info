@@ -2,7 +2,6 @@ type = module
 name = Search Krumo
 description = Makes it possible to search through Devels krumo's.
 package = Development
-version = VERSION
 backdrop = 1.x
 stylesheets[all][] = search_krumo.css
 dependencies[] = devel
