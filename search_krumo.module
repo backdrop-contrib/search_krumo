@@ -41,7 +41,7 @@ function search_krumo_init() {
  */
 function search_krumo_js_alter(&$javascript) {
   // This is the path for the Devel krumo Javascript.
-  $devel_js_path = backdrop_get_path('module', 'devel') . '/devel_krumo_path.js';
+  $devel_js_path = backdrop_get_path('module', 'devel') . '/devel_krumo.js';
 
   // When Devel krumo Javascript is not present, remove Search Krumo Javascript.
   if (!isset($javascript[$devel_js_path])) {
