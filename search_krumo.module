@@ -34,28 +34,12 @@ function search_krumo_init() {
 }
 
 /**
- * Implements hook_js_alter().
- *
- * With this function we check if there is a krumo present. If there is we can
- * leave our own Javascript, otherwise our Javascript is not needed either.
- */
-function search_krumo_js_alter(&$javascript) {
-  // This is the path for the Devel krumo Javascript.
-  $devel_js_path = backdrop_get_path('module', 'devel') . '/devel_krumo.js';
-
-  // When Devel krumo Javascript is not present, remove Search Krumo Javascript.
-  if (!isset($javascript[$devel_js_path])) {
-    unset($javascript[backdrop_get_path('module', 'search_krumo') . '/search_krumo.search.js']);
-    unset($javascript[backdrop_get_path('module', 'search_krumo') . '/search_krumo.trail.js']);
-  }
-}
-
-/**
  * Add required Javascript files for Search Krumo.
  *
  * We need this to add the JavaScript every time that we display a krumo.
  */
 function add_search_krumo() {
+  backdrop_add_js(backdrop_get_path('module', 'search_krumo') . '/search_krumo.devel.js');
   backdrop_add_js(backdrop_get_path('module', 'search_krumo') . '/search_krumo.search.js');
   backdrop_add_js(backdrop_get_path('module', 'search_krumo') . '/search_krumo.trail.js');
 }
